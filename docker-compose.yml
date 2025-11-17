@@ -1,10 +1,26 @@
-version: '3.8'
+version: "3.9"
+
 services:
   sartu.app:
     build: .
     container_name: sartu.app
+    working_dir: /var/www/html
     volumes:
       - .:/var/www/html
+    networks:
+      - sartu-network
+
+  sartu.node:
+    image: node:21.6.1
+    container_name: sartu.node
+    working_dir: /var/www/html
+    volumes:
+      - .:/var/www/html
+    command: ["npm", "run", "dev"]
+    ports:
+      - "5173:5173"
+    environment:
+      - CHOKIDAR_USEPOLLING=true   # Necesario para hot reload dentro de Docker
     networks:
       - sartu-network
 
@@ -25,10 +41,13 @@ services:
     image: mysql:8.0
     container_name: sartu.db
     ports:
-      - "3306:3306"
+      - "3307:3306"
     environment:
       MYSQL_DATABASE: rk_sartu
       MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: user
+      MYSQL_PASSWORD: 123456
+      MYSQL_ROOT_HOST: "%"      
     volumes:
       - sartu_db_data:/var/lib/mysql
     networks:

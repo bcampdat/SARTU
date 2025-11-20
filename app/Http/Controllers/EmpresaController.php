@@ -7,12 +7,6 @@ use Illuminate\Http\Request;
 
 class EmpresaController extends Controller
 {
-    public function __construct()
-    {
-       $this->middleware('auth');
-       $this->middleware('role:admin_sistema');
-
-    }
 
     public function index()
     {

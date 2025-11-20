@@ -9,10 +9,6 @@ use Illuminate\Support\Facades\Auth;
 
 class FichajeController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('role:admin_sistema');
-    }
 
     public function index()
     {

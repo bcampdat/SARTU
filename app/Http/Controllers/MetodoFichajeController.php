@@ -7,10 +7,6 @@ use Illuminate\Http\Request;
 
 class MetodoFichajeController extends Controller
 {
-    public function __construct() {
-        $this->middleware('role:admin');
-    }
-
     public function index() {
         return view('metodos.index', ['metodos' => MetodoFichaje::all()]);
     }

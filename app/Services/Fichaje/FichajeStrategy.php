@@ -1,4 +1,5 @@
-// app/Services/FichajeContext.php
+<?php
+
 namespace App\Services;
 
 class FichajeContext
